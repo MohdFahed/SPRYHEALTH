@@ -1,0 +1,213 @@
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div
+      class="offset-md-4 col-md-4 offset-md-4 border pt-2"
+      [formGroup]="formData"
+    >
+      <div class="mb-3">
+        <label for="fName" class="form-label">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="fName"
+          formControlName="firstName"
+          [ngClass]="{
+            'is-invalid': formSubmited && formStatus['firstName'].errors
+          }"
+        />
+        <div
+          *ngIf="formSubmited && formStatus['firstName'].errors"
+          class="invalid-feedback"
+        >
+          <label
+            *ngIf="formSubmited && formStatus['firstName'].errors['required']"
+          >
+            First Name required</label
+          >
+          <label
+            *ngIf="formSubmited && formStatus['firstName'].errors['pattern']"
+          >
+            Please Enter alphabet only</label
+          >
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="lName" class="form-label">Last Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="fName"
+          formControlName="lastName"
+          [ngClass]="{
+            'is-invalid': formSubmited && formStatus['lastName'].errors
+          }"
+        />
+        <div
+          *ngIf="formSubmited && formStatus['lastName'].errors"
+          class="invalid-feedback"
+        >
+          <label
+            *ngIf="formSubmited && formStatus['lastName'].errors['required']"
+          >
+            Last Name required</label
+          >
+          <label
+            *ngIf="formSubmited && formStatus['lastName'].errors['pattern']"
+          >
+            Please Enter alphabet only</label
+          >
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          formControlName="email"
+          [ngClass]="{
+            'is-invalid': formSubmited && formStatus['email'].errors
+          }"
+        />
+        <div
+          *ngIf="formSubmited && formStatus['email'].errors"
+          class="invalid-feedback"
+        >
+          <label *ngIf="formSubmited && formStatus['email'].errors['required']">
+            email required</label
+          >
+          <label *ngIf="formSubmited && formStatus['email'].errors['pattern']">
+            Invalid email
+          </label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="phone" class="form-label">Phone Number</label>
+        <input
+          type="text"
+          class="form-control"
+          id="phone"
+          formControlName="phone"
+          [ngClass]="{
+            'is-invalid': formSubmited && formStatus['phone'].errors
+          }"
+        />
+        <div
+          *ngIf="formSubmited && formStatus['phone'].errors"
+          class="invalid-feedback"
+        >
+          <label *ngIf="formSubmited && formStatus['phone'].errors['required']">
+            phone required</label
+          >
+          <label *ngIf="formSubmited && formStatus['phone'].errors['pattern']">
+            Invalid phone number</label
+          >
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">Address</label>
+        <textarea
+          type="text"
+          class="form-control"
+          id="address"
+          formControlName="address"
+          [ngClass]="{
+            'is-invalid': formSubmited && formStatus['address'].errors
+          }"
+        ></textarea>
+        <div
+          *ngIf="formSubmited && formStatus['address'].errors"
+          class="invalid-feedback"
+        >
+          <label
+            *ngIf="formSubmited && formStatus['address'].errors['required']"
+          >
+            Address required</label
+          >
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">Position</label>
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          formControlName="position"
+          [ngClass]="{
+            'is-invalid': formSubmited && formStatus['position'].errors
+          }"
+        >
+          <option *ngFor="let i of dropDown" [value]="i">{{ i }}</option>
+        </select>
+        <div
+          *ngIf="formSubmited && formStatus['position'].errors"
+          class="invalid-feedback"
+        >
+          <label
+            *ngIf="formSubmited && formStatus['position'].errors['required']"
+          >
+            Position required</label
+          >
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="date" class="form-label">Date of Joining</label>
+        <input
+          type="date"
+          class="form-control"
+          id="birthday"
+          name="date"
+          formControlName="doj"
+          [ngClass]="{
+            'is-invalid': formSubmited && formStatus['doj'].errors
+          }"
+        />
+        <div
+          *ngIf="formSubmited && formStatus['doj'].errors"
+          class="invalid-feedback"
+        >
+          <label *ngIf="formSubmited && formStatus['doj'].errors['required']">
+            Date of Joining required</label
+          >
+        </div>
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-primary m-2" (click)="sendDetails()">
+          Submit
+        </button>
+        <button class="btn btn-primary m-2" (click)="nextTask()">
+          Go to task 2
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4" *ngIf="formSubmited && formData.valid">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">email</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Address</th>
+              <th scope="col">position</th>
+              <th scope="col">Date of Joining</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="col">{{ formData.controls["firstName"].value }}</th>
+              <th scope="col">{{ formData.controls["lastName"].value }}</th>
+              <th scope="col">{{ formData.controls["email"].value }}</th>
+              <th scope="col">{{ formData.controls["phone"].value }}</th>
+              <th scope="col">{{ formData.controls["address"].value }}</th>
+              <th scope="col">{{ formData.controls["position"].value }}</th>
+              <th scope="col">{{ formData.controls["doj"].value }}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
